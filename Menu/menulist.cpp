@@ -236,17 +236,21 @@ int main(){
   while(run) {
     //float n = numberInput("How many Bottles of beer? ", cancel);
     cout << '\n';
-    cout << "Do you want to use decimal number's? (Y/N/C = cancel): ";
+    cout << "1. Do you want to use decimal number's? " << endl;
+    cout << "2. Do you want to use regular number's? " << endl;
+    cout << '\n';
+    cout << "You may cancel any time by typing C or c. " << endl;
+    cout << '\n';
     cin >> response;
     cout << '\n';
-    if (response[0] == 'Y' || response[0] == 'y'){
+    if (response[0] == '1'){
 
       float n = decimalInput("What decimal number would you like? ", cancel);
       cout << '\n';
       cout << fixed << n << endl;
       cout << '\n';
 
-    }else if(response[0] == 'N' || response[0] == 'n'){
+    }else if(response[0] == '2'){
 
       int n = numberInput("What regular number would you like? ", cancel);
       cout << '\n';
@@ -257,8 +261,9 @@ int main(){
       run = false;
       cout << "You have canceled the program. Bye Bye." << endl;
       cout << '\n';
-    } else if (response[0] != 'Y' || response[0] != 'y', response[0] != 'N' || response[0] != 'n', response[0] != 'C' || response[0] != 'c'){
-                cout << "Invalid answer. Choose Y, N or C. " << response << " is not valid!" << endl;
+
+    } else if (response[0] != '1' || response[0] != '2'|| response[0] != 'c'){
+                cout << "Invalid answer. This " << response << " is not an option!"<< endl;
     }
   }
   return 0;
