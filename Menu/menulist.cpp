@@ -3,267 +3,127 @@
 
 using namespace std;
 
-float decimalInput(const char* msg, bool& cancel){
-  //Benutzer Eingabe
-  char input[100];
-  cout << msg;
-  cancel = false;
-  float result = 0;
-  int divi = 1, cp = 0, ck = 0;
-  char lastChar = '\0';
-  char realLastChar = '\0';
-  bool success = false;
-  while(!success){
-    result = 0;
-    success = true;
-    divi = 1;
-    cp = 0;
-    ck = 0;
-    lastChar = '\0';
-    realLastChar = '\0';
-    cin >> input;
-    if(strcmp(input, "cancel") == 0){
-      cancel = true;
-      return 0;
-    }
-    //Durchlauf aller eigegebenen Buchstaben
-    for(int i = 0; input[i] != '\0'; i++) {
-      char c = input[i]; //c ist der aktuelle Character1
+/*
+userinput(const char* msg, bool& cancel){
+char input [50];
+cout << msg;
+cancel = false;
+char n; //name
+char ln; //lastname
+int a; //age
+char c; //city
+int counter;
 
-      switch(c){
-        case '.':
-            cp++;
-            divi = 1;
-            if(c != realLastChar){
-              lastChar = c;
-            }else{
-              lastChar = '\0';
-            }
-            realLastChar = c;
-          break;
+cin >> n;
+cin >> ln;
+cin >> a;
+cin >> c;
 
-        case ',':
-            ck++;
-            divi = 1;
-            if(c != realLastChar){
-              lastChar = c;
-            }else{
-              lastChar = '\0';
-            }
-            realLastChar = c;
-          break;
+}
+*/
 
+char* readline(){
+  int size = 1; cout << "Starten mit size = 1\n";
+  char* result;
+  result = (char*) calloc(size, sizeof(char));  cout << "Starten mit result zeiger auf string länge 1\n";
+  char c = '\0'; cout << "Starten mit c = \\0\n";
+  *result = c; cout << "Starten mit *result = c aka \\0\n";
 
-        case '0':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 0;
-          break;
-
-        case '1':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 1;
-          break;
-
-        case '2':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 2;
-          break;
-
-        case '3':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 3;
-          break;
-
-        case '4':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 4;
-          break;
-
-        case '5':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 5;
-          break;
-
-        case '6':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 6;
-          break;
-
-        case '7':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 7;
-          break;
-
-        case '8':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 8;
-          break;
-
-        case '9':
-            if(lastChar != '\0'){
-              divi = divi * 10;
-            }
-            result = result * 10 + 9;
-          break;
-
-        default:
-          success = false;
-          cout << "This is not a decimal number: " << c << endl;
-          cout << '\n';
-          cout << "Try again: " << endl;
-          break;
-      }
-      if(!success)
-        break;
-    }
-    if((cp == 0) && (ck == 0)){
-      success = false;
-      cout << '\n';
-      cout << "This is not a decimalnumber. Try Again: " << endl;
-    } else {
-    if((cp > 1) && (ck > 1)) { success = false; cout<<""<<endl; }
-    if((cp > 1) && (ck >= 1) && (realLastChar == '.')) { success = false; cout<<"Invalid."<<endl; }
-    if((ck > 1) && (cp >= 1) && (realLastChar == ',')) { success = false; cout<<"Invalid."<<endl; }
-    cout << '\n';
-    cout << "Result: " << fixed << result << endl;
-    cout << "Divi:  " << fixed << divi << endl;
-    result /= divi;
-    cout << "Number of comma: " << ck << endl;
-    cout << "Number of dot's: " << cp << endl;
-    }
+  while (cin.get(c) && c != '\n'){
+    cout << "Setzen größe von result auf size + 1 aka " << size + 1 << "\n";
+    result = (char*) realloc(result, (size + 1) * sizeof(char));
+    cout << "Setzen result[" << size - 1 << "] = " << c << "\n";
+    *(result + size -1 ) = c;
+    cout << "Setzen result[" << size << "] = \\0\n";
+    *(result + size) = '\0';
+    size++;
+    cout << "Size ist nun " << size << "\n";
   }
+
   return result;
 }
 
-int numberInput(const char* msg, bool& cancel){
-  //Benuzer Eingabe
-  char input[100];
-  cout << msg;
-  cancel = false;
-  int result = 0;
-  bool success = false;
-  while(!success){
-    result = 0;
-    success = true;
-    cin >> input;
-    if(strcmp(input, "cancel") == 0){
-      cancel = true;
-      return 0;
-    }
-    //Durchlauf aller eigegebenen Buchstaben
-    for(int i = 0; input[i] != '\0'; i++) {
-      char c = input[i]; //c ist der aktuelle Character1
-
-      switch(c){
-        case '0':
-            result = result * 10 + 0;
-          break;
-
-        case '1':
-            result = result * 10 + 1;
-          break;
-
-        case '2':
-            result = result * 10 + 2;
-          break;
-
-        case '3':
-            result = result * 10 + 3;
-          break;
-
-        case '4':
-            result = result * 10 + 4;
-          break;
-
-        case '5':
-            result = result * 10 + 5;
-          break;
-
-        case '6':
-            result = result * 10 + 6;
-          break;
-
-        case '7':
-            result = result * 10 + 7;
-          break;
-
-        case '8':
-            result = result * 10 + 8;
-          break;
-
-        case '9':
-            result = result * 10 + 9;
-          break;
-
-        default:
-          success = false;
-          cout << "This is not a regular number: " << c << endl;
-          cout << '\n';
-          cout << "Try again. " << endl;
-          break;
-      }
-      if(!success)
-        break;
-    }
-  }
-  return result;
-}
 
 int main(){
 
   char response[1];
-  bool cancel = false;
   bool run = true;
+  char strl;
+  char fn[100]; //firstname
+  char ln[100]; //lastname
+  int a; //age
+  char c[100]; //city
+  int counter = 0;
+  readline(fn);
+  //cin.get
 
-  while(run) {
-    //float n = numberInput("How many Bottles of beer? ", cancel);
-    cout << '\n';
-    cout << "1. Do you want to use decimal number's? " << endl;
-    cout << "2. Do you want to use regular number's? " << endl;
-    cout << '\n';
-    cout << "You may cancel any time by typing C or c. " << endl;
-    cout << '\n';
+
+  while(run){
+
+    cout << "1. View Data." << endl;
+    cout << "2. Input Data. " << endl;
+    cout << "What would you like to do?" <<endl;
+    cout << "Choose a given number: ";
     cin >> response;
     cout << '\n';
-    if (response[0] == '1'){
-
-      float n = decimalInput("What decimal number would you like? ", cancel);
-      cout << '\n';
-      cout << fixed << n << endl;
-      cout << '\n';
-
-    }else if(response[0] == '2'){
-
-      int n = numberInput("What regular number would you like? ", cancel);
-      cout << '\n';
-      cout << n <<endl;
-      cout << '\n';
-
-    } else if(response[0] == 'C' || response[0] == 'c'){
+    if (response[0] == 'c'){
       run = false;
-      cout << "You have canceled the program. Bye Bye." << endl;
-      cout << '\n';
+    }
+    if (response[0] == '1'){
+      char choice[2];
+      if (counter == 0){
+        cout << "No Data has been entered jet." << endl;
+        cout << '\n';
+      }else if(counter > 0){
+        cout << "What Data would you like to view?" << endl;
+        cout << "1. Firstname. " << endl;
+        cout << "2. Lastname. " << endl;
+        cout << "3. Age. " << endl;
+        cout << "4. City. " << endl;
+        cout << "5. All Data. " << endl;
+        cin >> choice;
 
-    } else if (response[0] != '1' || response[0] != '2'|| response[0] != 'c'){
-                cout << "Invalid answer. This " << response << " is not an option!"<< endl;
+        if (choice[0] == '1'){
+          cout << "You have choosen the categorie Firstname." << endl;
+          cout << '\n';
+          cout << counter << ". " << fn << endl;
+          cout << '\n';
+        }else if (choice[0] == '2'){
+          cout << "You have choosen the categorie Lastname." << endl;
+          cout << '\n';
+          cout << counter << ". " << ln << endl;
+          cout << '\n';
+        }else if (choice[0] == '3'){
+          cout << "You have choosen the categorie Age." << endl;
+          cout << '\n';
+          cout << counter << ". " << a << endl;
+          cout << '\n';
+        }else if (choice[0] == '4'){
+          cout << "You have choosen the categorie City." << endl;
+          cout << '\n';
+          cout << counter << ". " << c << endl;
+          cout << '\n';
+        }else if (choice[0] == '5'){
+          cout << "You have choosen the categorie All Data." << endl;
+          cout << '\n';
+          cout << counter << ". " << fn << " " << ln << ", " << a << ", " << c << ";" << endl;
+          cout << '\n';
+        }else if (choice[0] != 1, choice[0] != 2, choice[0] != 3, choice[0] != 4, choice[0] != 5){
+          cout << "Not a valid option!" << endl;
+        }
+      }
+    }else if(response[0] == '2'){
+      cout << "Input Firstname, Lastname, Age and City:  ";
+      cin >> fn >> ln >> a >> c;
+      counter++;
+      cout << '\n';
+      cout << counter << ". " << fn << " " << ln << " is " << a << " year's old. " << endl;
+      cout << fn << " " << ln << " lives in " << c << "." << endl;
+      cout << '\n';
+    }else if (response[0] != 1 || response[0] != 2){
+      cout << '\n';
+      cout << "Not a give number. Choose 1 or 2!" << endl;
+      cout << '\n';
     }
   }
   return 0;
