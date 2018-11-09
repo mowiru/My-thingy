@@ -49,12 +49,12 @@ int main(){
   char response[1];
   bool run = true;
   char strl;
-  char fn[100]; //firstname
-  char ln[100]; //lastname
+  char* fn = readline();; //firstname
+  char* ln = readline();; //lastname
   int a; //age
-  char c[100]; //city
+  char* c = readline();; //city
   int counter = 0;
-  readline(fn);
+
   //cin.get
 
 
