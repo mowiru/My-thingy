@@ -1,11 +1,16 @@
-SOURCES=$(wildcard ./*.cpp)
-PROJECT=menu
+#SOURCES=$(wildcard ./*.cpp)
 
-all: $(PROJECT)
-	echo making
+all: PersonEingabe AutoEingabe
+	#making
 
-$(PROJECT): $(SOURCES)
-	g++ $(SOURCES) -o $(PROJECT)
+my_func: ./my_function.cpp
+	#Fettisch
 
-list: $(PROJECT)
-	./$(PROJECT) debug
+PersonEingabe: my_func ./main.cpp
+	g++ -o persoInput ./main.cpp ./my_function.cpp
+
+AutoEingabe: my_func ./auto.cpp
+	g++ -o autoInput ./auto.cpp ./my_function.cpp
+
+test: AutoEingabe
+	./autoInput debug

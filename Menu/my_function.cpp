@@ -12,21 +12,25 @@ void dataOutput(const char* label, int counter, const char* value) {
   cout << '\n';
 }
 
-void categorie(){
-  cout << "What Data would you like to view?" << endl;
-  cout << "1. Firstname. " << endl;
-  cout << "2. Lastname. " << endl;
-  cout << "3. Age. " << endl;
-  cout << "4. City. " << endl;
-  cout << "5. All Data. " << endl;
-}
+int showMenu(const char* options[], const char* title, int optionCount){
 
-void menu(){
-  cout << '\n' << endl;
-  cout << "1. View Data." << endl;
-  cout << "2. Input Data. " << endl;
-  cout << "What would you like to do?" <<endl;
-  cout << "Choose a given number: ";
+  int selection = -1;
+
+  while( selection < 0 || selection >= optionCount ){
+
+    cout << title << endl;
+
+    for(int i = 0; i < optionCount; i++){
+      cout << i + 1 << ". " << options[i] << endl;
+    }
+
+    selection = ui::numberInput("Select: ") - 1;
+
+    if( selection < 0 || selection >= optionCount)
+      cout << "Not valid!" <<endl;
+  }
+
+  return selection;
 }
 
 char* ui::readLine(){
