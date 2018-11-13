@@ -1,3 +1,5 @@
+#include "objects.h"
+
 
 int showMenu(const char* options[], const char* title, int optionCount);
 

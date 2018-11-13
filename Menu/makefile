@@ -6,7 +6,7 @@ all: Kingmenu PersonEingabe AutoEingabe
 my_func: ./my_function.cpp
 
 Kingmenu: PersonEingabe AutoEingabe
-	g++ -o Kingmenu ./my_function.cpp ./Kingmenu.cpp
+	g++ -o Kingmenu ./my_function.cpp ./Kingmenu.cpp ./objects.cpp
 
 PersonEingabe: my_func ./people.cpp
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <math.h>
-
+#include "objects.h"
 #include "my_function.h"
 
 #include "auto.cpp"
@@ -12,6 +12,27 @@ using namespace std;
 
 int main(){
 
+  struct kette* MyKette = NULL;
+
+  while (true) {
+    char* input = ui::readLine("Enter Person: ");
+    if(strcmp(input,"cancel") == 0) break;
+    kette_push(MyKette, input);
+  }
+
+  //Liste ist fertig
+
+  cout << "MyKette hat (" << kette_count(MyKette) << ") Elemente. Diese sind:" << endl;
+  for(int i = 0; i < kette_count(MyKette); i++) {
+    cout << kette_at(MyKette, i).value.value << endl;
+  }
+
+  return 0;
+
+
+
+
+
   bool run = true;
 
 
@@ -19,7 +40,7 @@ int main(){
   const char* MainMenuOptions[4] = {
     "People.",
     "Cars.",
-    "Calculator",
+    "Calculator.",
     "Quit"
   };
 
@@ -48,7 +69,7 @@ int main(){
 
       case 3:
         cout << '\n';
-        cout << "TERMINATED PROGRAM" << endl;
+        cout << " !!! TERMINATED PROGRAM !!!" << endl;
         cout << '\n';
         run = false;
         break;

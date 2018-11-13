@@ -18,7 +18,9 @@ int showMenu(const char* options[], const char* title, int optionCount){
 
   while( selection < 0 || selection >= optionCount ){
 
+    cout << "___________" << endl;
     cout << title << endl;
+    cout << "___________" << endl;
 
     for(int i = 0; i < optionCount; i++){
       cout << i + 1 << ". " << options[i] << endl;
@@ -73,7 +75,9 @@ char* ui::readLine(const char* msg, int& length){
 bool ui::confirm(const char* msg){
   while(true){
     char* response;
+    cout<<'\n';
     cout << msg << " (Y/N): " << endl;
+    cout<<'\n';
     response = ui::readLine();
     if (*response == 'Y' || *response == 'y'){
       return true;
