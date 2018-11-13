@@ -258,7 +258,7 @@ int main(){
       cout << "You have canceled the program. Bye Bye." << endl;
       cout << '\n';
     } else if (response[0] != 'Y' || response[0] != 'y', response[0] != 'N' || response[0] != 'n', response[0] != 'C' || response[0] != 'c'){
-                cout << "Invalid answer. Choose Y, N or C. " << response << " is not valid!" << endl;
+        cout << "Invalid answer. Choose Y, N or C. " << response << " is not valid!" << endl;
     }
   }
   return 0;

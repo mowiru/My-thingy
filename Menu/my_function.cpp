@@ -70,6 +70,21 @@ char* ui::readLine(const char* msg, int& length){
   return result;
 }
 
+bool ui::confirm(const char* msg){
+  while(true){
+    char* response;
+    cout << msg << " (Y/N): " << endl;
+    response = ui::readLine();
+    if (*response == 'Y' || *response == 'y'){
+      return true;
+    }else if (*response == 'N' || *response == 'n'){
+      return false;
+    }else if (*response != 'Y' || *response != 'y', *response != 'N' || *response != 'n'){
+      cout << "Invalid answer. Choose Y or N. " << *response << " is not valid!" << endl;
+    }
+  }
+}
+
 float ui::decimalInput(){
   return ui::decimalInput("");
 }
@@ -107,9 +122,9 @@ float ui::decimalInput(const char* msg, bool& cancel){
       return 0;
     }
     //Durchlauf aller eigegebenen Buchstaben
-    for(int i = 0; *input != '\0'; i++) {
-      char c = *input + 1; //c ist der aktuelle Character1
-
+    for(int i = 0; i < length; i++) {
+      char c = *(input + i); //c ist der aktuelle Character1
+      cout << input << ": i = " << c << endl;
       switch(c){
         case '.':
             cp++;

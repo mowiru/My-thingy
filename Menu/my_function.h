@@ -1,12 +1,11 @@
 
-//void menu();
-//void categorie();
-
 int showMenu(const char* options[], const char* title, int optionCount);
 
 void dataOutput(const char* label, int counter, const char* value);
 
 namespace ui {
+
+  bool confirm(const char* msg);
 
   char* readLine();
   char* readLine(int& length);
