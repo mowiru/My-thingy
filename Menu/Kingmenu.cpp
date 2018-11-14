@@ -7,11 +7,13 @@
 #include "auto.cpp"
 #include "people.cpp"
 #include "calc.cpp"
+#include "human.cpp"
 
 using namespace std;
 
-int main(){
 
+int main(){
+  /*
   struct kette* MyKette = NULL;
 
   while (true) {
@@ -28,50 +30,55 @@ int main(){
   }
 
   return 0;
-
-
-
+  */
 
 
   bool run = true;
 
-
   //Mainmenu Option List and Count how many
-  const char* MainMenuOptions[4] = {
+  const char* MainMenuOptions[5] = {
     "People.",
     "Cars.",
     "Calculator.",
+    "Humanresources.",
     "Quit"
   };
 
   while(run){
-    switch(showMenu( MainMenuOptions,"TopMenu", 4)){
+    switch(showMenu( MainMenuOptions,"TopMenu", 5)){
       case 0:
-        cout << "You have choosen People." << endl;
-        cout << '\n';
-        people_selection(run);
-        cout << '\n';
+          cout << "You have choosen People." << endl;
+          cout << '\n';
+          people_selection(run);
+          cout << '\n';
         break;
 
       case 1:
-        cout << "You have choosen Cars." << endl;
-        cout << '\n';
-        car_selection(run);
-        cout << '\n';
+          cout << "You have choosen Cars." << endl;
+          cout << '\n';
+          car_selection(run);
+          cout << '\n';
         break;
 
       case 2:
-        cout << '\n';
-        cout << "You have choosen Calculator." << endl;
-        cout << '\n';
-        calculator(run);
+          cout << '\n';
+          cout << "You have choosen Calculator." << endl;
+          cout << '\n';
+          calculator(run);
         break;
 
       case 3:
-        cout << '\n';
-        cout << " !!! TERMINATED PROGRAM !!!" << endl;
-        cout << '\n';
-        run = false;
+          cout << '\n';
+          cout << "You have choosen Humanresources." << endl;
+          cout << '\n';
+          hr(run);
+        break;
+
+      case 4:
+          cout << '\n';
+          cout << " !!! TERMINATED PROGRAM !!!" << endl;
+          cout << '\n';
+          run = false;
         break;
     }
   }
