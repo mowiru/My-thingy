@@ -16,12 +16,6 @@ int rnd(int min, int max){
 }
 
 int hr(bool& parentRun){
-  struct Employee
-  {
-    int id;
-    int age;
-    double wage;
-  } MyEmpl[100];
 
   bool run = true;
 
@@ -31,11 +25,19 @@ int hr(bool& parentRun){
 
     x = ui::numberInput("How many Employee's? ");
 
+    struct Employee
+    {
+      int id;
+      int age;
+      double wage;
+    } MyEmpl[x];
+
     cout << '\n';
     cout << "This is the list of Employee's: " << endl;
     cout << '\n';
 
     for(int i = 0; i < x; i++){
+      cout << "i=" << i << endl;
       MyEmpl[i].id = i+1;
       //MyEmpl[i].age = rand() % 65 + 25;
       MyEmpl[i].age = rnd(14,70);
@@ -49,7 +51,6 @@ int hr(bool& parentRun){
     }
     cout << '\n';
     for(int i = 0; i < x; i++){
-      MyEmpl[i].id = i+1;
       if(MyEmpl[i].age > 65 && MyEmpl[i].wage < 5000 ){
         cout << "ID " << MyEmpl[i].id << ". " << "should retire." << endl;
       }else if(MyEmpl[i].age < 65 && MyEmpl[i].wage > 5000){
@@ -62,17 +63,20 @@ int hr(bool& parentRun){
       }
     }
     cout << '\n';
+
+    ui::readLine();
+
   }while(ui::confirm("Again?"));
 
 
-  do {
+  /*do {
     int index = ui::numberInput("View a specific ID: ") - 1;
 
     cout << "ID:   " << MyEmpl[index].id << endl;
     cout << "Age:  " << MyEmpl[index].age << endl;
     cout << "Wage: " << MyEmpl[index].wage << endl;
 
-  } while(ui::confirm("View another?"));
+  } while(ui::confirm("View another?"));*/
 
 
   return 0;
