@@ -58,9 +58,7 @@ int hr(bool& parentRun){
         cout << "ID " << MyEmpl[i].id << ". " << "should be fired! " << endl;
       }else if (MyEmpl[i].age < 18){
         MyEmpl[i].wage = 0;
-        cout << '\n';
         cout << "ID " << MyEmpl[i].id << ". " << "is to young. " << endl;
-        cout << '\n';
       }
     }
     cout << '\n';
@@ -68,13 +66,13 @@ int hr(bool& parentRun){
 
 
   do {
-    int index = ui::numberInput("Welchen Mittarbetier willst du sehen: ") - 1;
+    int index = ui::numberInput("View a specific ID: ") - 1;
 
     cout << "ID:   " << MyEmpl[index].id << endl;
     cout << "Age:  " << MyEmpl[index].age << endl;
     cout << "Wage: " << MyEmpl[index].wage << endl;
 
-  } while(ui::confirm("Noma Gucken?"));
+  } while(ui::confirm("View another?"));
 
 
   return 0;
