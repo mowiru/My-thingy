@@ -11,12 +11,38 @@
 
 using namespace std;
 
-
 int main(){
-  /*
+
+
   struct kette* MyKette = NULL;
 
-  while (true) {
+  kette_push(MyKette, "Ulli");
+  kette_push(MyKette, "Peter");
+  kette_push(MyKette, "Uwe");
+
+  kette_insert(MyKette, "A1", 0);
+  kette_insert(MyKette, "A2", 0);
+  kette_insert(MyKette, "A3", 0);
+  kette_insert(MyKette, "A4", 0);
+
+  kette_remove(MyKette, 0);
+
+  kette_insert(MyKette, "Kevin", 2);
+  kette_remove(MyKette, 1);
+
+
+
+  /////////////////////////////////////////////////
+  const char* proof[7] = {"Ulli","Kevin","Uwe", "?", "?", "?", "?"};
+  for(int i = 0; i < kette_count(MyKette); i++) {
+    cout << kette_at(MyKette, i).value.value << " sollte sein " << proof[i] << endl;
+  }
+
+  return 0;
+
+
+
+  /*while (true) {
     char* input = ui::readLine("Enter Person: ");
     if(strcmp(input,"cancel") == 0) break;
     kette_push(MyKette, input);
@@ -29,8 +55,7 @@ int main(){
     cout << kette_at(MyKette, i).value.value << endl;
   }
 
-  return 0;
-  */
+  return 0;*/
 
 
   bool run = true;

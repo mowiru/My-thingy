@@ -1,5 +1,6 @@
 #include "objects.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 
 
@@ -57,4 +58,36 @@ struct kette kette_at(struct kette* MyDonut, int Index) {
     currentEle = currentEle->next;
   }
   return *currentEle;
+}
+
+void kette_insert(struct kette*& MyDonut, const char* name, int target){
+  struct kette* newSquare = newKette(name);
+  if(target == 0){
+    newSquare->next = MyDonut;
+    MyDonut = newSquare;
+    return;
+  }
+  struct kette* currentElement = MyDonut;
+  for(int i = 0; i < target - 1; i++){
+    currentElement = currentElement->next;
+  }
+  newSquare->next = currentElement->next;
+  currentElement->next = newSquare;
+}
+
+void kette_remove(struct kette*& MyDonut, int target){
+  struct kette* nnElement;
+  if(target == 0){
+    nnElement = MyDonut->next;
+    delete MyDonut;
+    MyDonut = nnElement;
+    return;
+  }
+  struct kette* currentElement = MyDonut;
+  for (int i = 0; i > target - 1; i++){
+    currentElement = currentElement->next;
+  }
+  nnElement = currentElement->next->next;
+  delete currentElement->next;
+  currentElement->next = nnElement;
 }

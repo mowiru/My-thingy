@@ -21,4 +21,8 @@ int kette_count(struct kette* MyDonut);
 
 struct kette kette_at(struct kette* MyDonut, int Index);
 
+void kette_insert(struct kette*& MyDonut, const char* name, int target);
+
+void kette_remove(struct kette*& MyDonut, int target);
+
 #endif

@@ -4,7 +4,12 @@
 #include "objects.h"
 #include "my_function.h"
 
+#include "human_function.cpp"
+
 bool RND_SEED_IS_SET = false;
+
+
+
 
 //rnd(10,100)
 int rnd(int min, int max){
@@ -19,25 +24,24 @@ int hr(bool& parentRun){
 
   bool run = true;
 
+  int x;
+
+  x = ui::numberInput("How many Employee's? ");
+
+  struct Employee
+  {
+    int id;
+    int age;
+    double wage;
+  } MyEmpl[x];
+
+
   do{
-    int x;
-    cout << '\n';
-
-    x = ui::numberInput("How many Employee's? ");
-
-    struct Employee
-    {
-      int id;
-      int age;
-      double wage;
-    } MyEmpl[x];
-
     cout << '\n';
     cout << "This is the list of Employee's: " << endl;
     cout << '\n';
 
     for(int i = 0; i < x; i++){
-      cout << "i=" << i << endl;
       MyEmpl[i].id = i+1;
       //MyEmpl[i].age = rand() % 65 + 25;
       MyEmpl[i].age = rnd(14,70);
@@ -64,11 +68,53 @@ int hr(bool& parentRun){
     }
     cout << '\n';
 
-    ui::readLine();
-
   }while(ui::confirm("Again?"));
 
+  ui::confirm("Would you like to do something else with this data?");
 
+  const char* ViewDataOptions[4] = {
+    "Insert Data.",
+    "Delete Data.",
+    "Back.",
+    "Quit."
+  };
+
+  /*
+  while(run){
+
+    int selection = showMenu(ViewDataOptions, "Choose Path", 4);
+
+    switch (selection) {
+
+      case 0:
+          cout << '\n';
+          cout << "Insert Data" << endl;
+        break;
+
+      case 1:
+        do{
+          cout << '\n';
+          cout << "Delete Data" << endl;
+          x = ui::numberInput("Which ID?");
+          delete MyEmpl[x];
+          cout << "ID:   " << MyEmpl[x].id << endl;
+          cout << "Age:  " << MyEmpl[x].age << endl;
+          cout << "Wage: " << MyEmpl[x].wage << endl;
+        }while(ui::confirm("Again?"));
+        break;
+
+      case 2:
+          cout << "You went back" << endl;
+          run = false;
+        break;
+
+      case 3:
+          cout << "PROGRAM TERMINATED" << endl;
+          run = false;
+          parentRun = false;
+        break;
+    }
+  }
   /*do {
     int index = ui::numberInput("View a specific ID: ") - 1;
 
