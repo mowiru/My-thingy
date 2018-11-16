@@ -1,17 +1,13 @@
 #include <iostream>
-#include <string.h>
 #include <math.h>
+#include <string.h>
 #include "objects.h"
 #include "my_function.h"
 
-#include "human_function.cpp"
+using namespace std;
 
 bool RND_SEED_IS_SET = false;
 
-
-
-
-//rnd(10,100)
 int rnd(int min, int max){
   if(!RND_SEED_IS_SET) {
     srand(time(NULL));
@@ -20,7 +16,7 @@ int rnd(int min, int max){
   return min + (rand() % ((max - min)+ 1));
 }
 
-int hr(bool& parentRun){
+int humanresources(bool& parentRun){
 
   bool run = true;
 
@@ -28,13 +24,7 @@ int hr(bool& parentRun){
 
   x = ui::numberInput("How many Employee's? ");
 
-  struct Employee
-  {
-    int id;
-    int age;
-    double wage;
-  } MyEmpl[x];
-
+  struct hr* MyHumans = NULL;
 
   do{
     cout << '\n';
@@ -42,28 +32,25 @@ int hr(bool& parentRun){
     cout << '\n';
 
     for(int i = 0; i < x; i++){
-      MyEmpl[i].id = i+1;
-      //MyEmpl[i].age = rand() % 65 + 25;
-      MyEmpl[i].age = rnd(14,70);
-      MyEmpl[i].wage = rnd(1500, 6000);
+      chain_push(MyHumans, i + 1);
 
-      if (MyEmpl[i].id < 10){
-        cout << "ID 0" << MyEmpl[i].id << ". " << "Age: " << MyEmpl[i].age << ", " << "Wage: " << MyEmpl[i].wage << ";" << endl;
-      }else if(MyEmpl[i].id > 9){
-        cout << "ID " << MyEmpl[i].id << ". " << "Age: " << MyEmpl[i].age << ", " << "Wage: " << MyEmpl[i].wage << ";" << endl;
+      if (chain_at(MyHumans, i)->id < 10){
+        cout << "ID 0" << chain_at(MyHumans, i)->id << ". " << "Age: " << chain_at(MyHumans, i)->age << ", " << "Wage: " << chain_at(MyHumans, i)->wage << ";" << endl;
+      }else if(chain_at(MyHumans, i)->id > 9){
+        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "Age: " << chain_at(MyHumans, i)->age << ", " << "Wage: " << chain_at(MyHumans, i)->wage << ";" << endl;
       }
     }
     cout << '\n';
     for(int i = 0; i < x; i++){
-      if(MyEmpl[i].age > 65 && MyEmpl[i].wage < 5000 ){
-        cout << "ID " << MyEmpl[i].id << ". " << "should retire." << endl;
-      }else if(MyEmpl[i].age < 65 && MyEmpl[i].wage > 5000){
-        cout << "ID " << MyEmpl[i].id << ". " << "should be checked. " << endl;
-      }else if (MyEmpl[i].age > 65 && MyEmpl[i].wage > 5000){
-        cout << "ID " << MyEmpl[i].id << ". " << "should be fired! " << endl;
-      }else if (MyEmpl[i].age < 18){
-        MyEmpl[i].wage = 0;
-        cout << "ID " << MyEmpl[i].id << ". " << "is to young. " << endl;
+      if(chain_at(MyHumans, i)->age > 65 && chain_at(MyHumans, i)->wage < 5000 ){
+        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "should retire." << endl;
+      }else if(chain_at(MyHumans, i)->age < 65 && chain_at(MyHumans, i)->wage > 5000){
+        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "should be checked. " << endl;
+      }else if (chain_at(MyHumans, i)->age > 65 && chain_at(MyHumans, i)->wage > 5000){
+        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "should be fired! " << endl;
+      }else if (chain_at(MyHumans, i)->age < 18){
+        chain_at(MyHumans, i)->wage = 0.0;
+        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "is to young. " << endl;
       }
     }
     cout << '\n';
@@ -79,27 +66,26 @@ int hr(bool& parentRun){
     "Quit."
   };
 
-  /*
   while(run){
-
     int selection = showMenu(ViewDataOptions, "Choose Path", 4);
+    struct hr* myChain = NULL;
 
     switch (selection) {
 
       case 0:
+        do{
           cout << '\n';
           cout << "Insert Data" << endl;
+          chain_insert(myChain, 4, 6);
+        }while(ui::confirm("Again?"));
         break;
 
       case 1:
         do{
           cout << '\n';
           cout << "Delete Data" << endl;
-          x = ui::numberInput("Which ID?");
-          delete MyEmpl[x];
-          cout << "ID:   " << MyEmpl[x].id << endl;
-          cout << "Age:  " << MyEmpl[x].age << endl;
-          cout << "Wage: " << MyEmpl[x].wage << endl;
+          chain_remove(myChain, 3);
+
         }while(ui::confirm("Again?"));
         break;
 
@@ -115,15 +101,15 @@ int hr(bool& parentRun){
         break;
     }
   }
-  /*do {
-    int index = ui::numberInput("View a specific ID: ") - 1;
 
-    cout << "ID:   " << MyEmpl[index].id << endl;
-    cout << "Age:  " << MyEmpl[index].age << endl;
-    cout << "Wage: " << MyEmpl[index].wage << endl;
+  do {
+    int i = ui::numberInput("View a specific ID: ") - 1;
 
-  } while(ui::confirm("View another?"));*/
+    cout << "ID:   " << chain_at(MyHumans, i)->id << endl;
+    cout << "Age:  " << chain_at(MyHumans, i)->age << endl;
+    cout << "Wage: " << chain_at(MyHumans, i)->wage << endl;
 
+  } while(ui::confirm("View another?"));
 
   return 0;
 }

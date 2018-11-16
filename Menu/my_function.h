@@ -1,5 +1,13 @@
 #include "objects.h"
 
+int car_selection(bool& parentRun);
+
+int humanresources(bool& parentRun);
+
+int people_selection(bool& parentRun);
+
+int calculator(bool& parentRun);
+
 
 int showMenu(const char* options[], const char* title, int optionCount);
 

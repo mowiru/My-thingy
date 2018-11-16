@@ -4,15 +4,11 @@
 #include "objects.h"
 #include "my_function.h"
 
-#include "auto.cpp"
-#include "people.cpp"
-#include "calc.cpp"
-#include "human.cpp"
-
 using namespace std;
 
 int main(){
 
+/*
 
   struct kette* MyKette = NULL;
 
@@ -96,7 +92,7 @@ int main(){
           cout << '\n';
           cout << "You have choosen Humanresources." << endl;
           cout << '\n';
-          hr(run);
+          humanresources(run);
         break;
 
       case 4:
