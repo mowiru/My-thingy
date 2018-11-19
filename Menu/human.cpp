@@ -1,8 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <string.h>
-#include "objects.h"
-#include "my_function.h"
+#include "myFunction.h"
 
 using namespace std;
 
@@ -20,96 +19,103 @@ int humanresources(bool& parentRun){
 
   bool run = true;
 
-  int x;
+  int x, HumanCount;
 
   x = ui::numberInput("How many Employee's? ");
 
+  //list create START__________________________________________________________
   struct hr* MyHumans = NULL;
+  for(int i = 0; i < x; i++) {
+    chain_push(MyHumans, i + 1);
+  }
+  //list creat END_____________________________________________________________
 
+  //Resourcen Ausgabe START_____________________________________________________________
   do{
     cout << '\n';
     cout << "This is the list of Employee's: " << endl;
     cout << '\n';
 
-    for(int i = 0; i < x; i++){
-      chain_push(MyHumans, i + 1);
+    HumanCount = chain_count(MyHumans);
 
-      if (chain_at(MyHumans, i)->id < 10){
-        cout << "ID 0" << chain_at(MyHumans, i)->id << ". " << "Age: " << chain_at(MyHumans, i)->age << ", " << "Wage: " << chain_at(MyHumans, i)->wage << ";" << endl;
-      }else if(chain_at(MyHumans, i)->id > 9){
-        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "Age: " << chain_at(MyHumans, i)->age << ", " << "Wage: " << chain_at(MyHumans, i)->wage << ";" << endl;
+    for(int i = 0; i < HumanCount; i++){
+      struct hr* cH = chain_at(MyHumans, i);
+      if(cH->age > 65 && cH->wage < 5000 ){
+        cout << "ID " << cH->id << ". " << "should retire." << endl;
+      }else if(cH->age < 65 && cH->wage > 5000){
+        cout << "ID " << cH->id << ". " << "should be checked. " << endl;
+      }else if (cH->age > 65 && cH->wage > 5000){
+        cout << "ID " << cH->id << ". " << "should be fired! " << endl;
+      }else if (cH->age < 18){
+        cH->wage = 0.0;
+        cout << "ID " << cH->id << ". " << "is to young. " << endl;
       }
     }
     cout << '\n';
-    for(int i = 0; i < x; i++){
-      if(chain_at(MyHumans, i)->age > 65 && chain_at(MyHumans, i)->wage < 5000 ){
-        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "should retire." << endl;
-      }else if(chain_at(MyHumans, i)->age < 65 && chain_at(MyHumans, i)->wage > 5000){
-        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "should be checked. " << endl;
-      }else if (chain_at(MyHumans, i)->age > 65 && chain_at(MyHumans, i)->wage > 5000){
-        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "should be fired! " << endl;
-      }else if (chain_at(MyHumans, i)->age < 18){
-        chain_at(MyHumans, i)->wage = 0.0;
-        cout << "ID " << chain_at(MyHumans, i)->id << ". " << "is to young. " << endl;
-      }
+    for(int i = 0; i < HumanCount; i++){
+      struct hr* cH = chain_at(MyHumans, i);
+      hr_print(cH,i);
     }
     cout << '\n';
 
   }while(ui::confirm("Again?"));
+  //Resourcen Aushabe END_____________________________________________________________
 
-  ui::confirm("Would you like to do something else with this data?");
 
-  const char* ViewDataOptions[4] = {
-    "Insert Data.",
-    "Delete Data.",
-    "Back.",
-    "Quit."
-  };
+  if(ui::confirm("Would you like to do something else with this data?")) {
 
-  while(run){
-    int selection = showMenu(ViewDataOptions, "Choose Path", 4);
-    struct hr* myChain = NULL;
+    const char* ViewDataOptions[5] = {
+      "Insert Data.",
+      "Delete Data.",
+      "List All.",
+      "Back.",
+      "Quit."
+    };
 
-    switch (selection) {
+    while(run){
+      int selection = showMenu(ViewDataOptions, "Choose Path", 5);
 
-      case 0:
-        do{
-          cout << '\n';
-          cout << "Insert Data" << endl;
-          chain_insert(myChain, 4, 6);
-        }while(ui::confirm("Again?"));
-        break;
+      switch (selection) {
 
-      case 1:
-        do{
-          cout << '\n';
-          cout << "Delete Data" << endl;
-          chain_remove(myChain, 3);
+        case 0: //Insert
+          do{
+            cout << '\n';
+            cout << "Insert Data" << endl;
+            chain_insert(MyHumans, 4, 6);
+          }while(ui::confirm("Again?"));
+          break;
 
-        }while(ui::confirm("Again?"));
-        break;
+        case 1: //Delete
+          do{
+            cout << '\n';
+            cout << "Delete Data" << endl;
+            chain_remove(MyHumans, 3);
 
-      case 2:
-          cout << "You went back" << endl;
-          run = false;
-        break;
+          }while(ui::confirm("Again?"));
+          break;
 
-      case 3:
-          cout << "PROGRAM TERMINATED" << endl;
-          run = false;
-          parentRun = false;
-        break;
+        case 2: //List All
+          cout<<"All Humans:"<<endl;
+          HumanCount = chain_count(MyHumans);
+          for(int i = 0; i < HumanCount; i++){
+            struct hr* cH = chain_at(MyHumans, i);
+            hr_print(cH,i);
+          }
+          break;
+
+        case 3: //Back
+            cout << "You went back" << endl;
+            run = false;
+          break;
+
+        case 4: //Quit App
+            cout << "PROGRAM TERMINATED" << endl;
+            run = false;
+            parentRun = false;
+          break;
+      }
     }
   }
-
-  do {
-    int i = ui::numberInput("View a specific ID: ") - 1;
-
-    cout << "ID:   " << chain_at(MyHumans, i)->id << endl;
-    cout << "Age:  " << chain_at(MyHumans, i)->age << endl;
-    cout << "Wage: " << chain_at(MyHumans, i)->wage << endl;
-
-  } while(ui::confirm("View another?"));
 
   return 0;
 }

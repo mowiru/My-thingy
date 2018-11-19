@@ -1,7 +1,22 @@
 #include <iostream>
-#include "objects.h"
+#include "myFunction.h"
 
 using namespace std;
+
+void hr_print(struct hr* cH) {
+  hr_print(cH, -1);
+}
+void hr_print(struct hr* cH, int index) {
+  if (index >= 0)
+    cout << "Index: " << index << " ";
+
+  if (cH->id < 10)
+    cout << "ID 0";
+  else
+    cout << "ID ";
+
+  cout << cH->id << ". " << "Age: " << cH->age << ", " << "Wage: " << cH->wage << ";" << endl;
+}
 
 struct hr* newChain(int id){
     struct hr* result = new struct hr;
@@ -37,7 +52,7 @@ int chain_count(struct hr* human){
   return counter;
 }
 
-struct hr* chain_at(struct hr*& human, int index){
+struct hr* chain_at(struct hr* human, int index){
   struct hr* current = human;
   for(int i = 0; i < index; i++){
     current = current->next;
@@ -61,18 +76,21 @@ void chain_insert(struct hr*& human, int id, int target){
 }
 
 void chain_remove(struct hr*& human, int target){
+  cout << "TARGET: " << target << endl;
   struct hr* nnComponent;
   if(target == 0){
     nnComponent = human->next;
+    cout << "DELETING: " << human->id << endl;
     delete human;
     human = nnComponent;
     return;
   }
   struct hr* current = human;
-  for(int i = 0; i > target -1; i++){
+  for(int i = 0; i < target -1; i++){
     current = current->next;
   }
   nnComponent = current->next->next;
+  cout << "DELETING: " << current->next->id << endl;
   delete current->next;
   current->next = nnComponent;
 }

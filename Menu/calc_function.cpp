@@ -3,7 +3,7 @@
 #include <cmath>
 #include <list>
 
-#include "my_function.h"
+#include "myFunction.h"
 
 using namespace std;
 

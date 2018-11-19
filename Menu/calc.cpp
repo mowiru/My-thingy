@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
 
-#include "my_function.h"
+#include "myFunction.h"
 #include "calc_function.cpp"
 
 using namespace std;
