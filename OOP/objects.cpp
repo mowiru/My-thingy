@@ -65,3 +65,20 @@ animal::animal(const char* name, const char* color, const char* call){
   this->call = call;
 }
 #pragma endregion Animal_Class
+
+#pragma region Chef_Class
+
+void Chef::print(){
+  Employee::print();
+  cout << "state: " << this->state << endl;
+}
+
+Chef::Chef() : Employee::Employee(){
+  this->state = "?";
+}
+
+Chef::Chef(const char* name, const char* lastName, int age, int wage, const char* state) : Employee::Employee(name ,lastName, age, wage) {
+  this-> state = state;
+}
+
+#pragma endregion Chef_Class

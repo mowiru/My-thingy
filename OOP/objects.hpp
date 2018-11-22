@@ -13,14 +13,28 @@ class Person {
     virtual void print();
 };
 
-class Employee : public Person {
+class Employee : public Person{
+
   public:
     float wage;
 
-    void print();
+    virtual void print();
 
     Employee();
     Employee(const char* name, const char* lastName, int age, int wage);
+};
+
+class Chef : public Employee{
+
+  public:
+
+    const char* state;
+
+    void print();
+
+    Chef();
+    Chef(const char* name, const char* lastName, int age, int wage, const char* state);
+
 };
 
 class animal {
