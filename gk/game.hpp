@@ -1,15 +1,31 @@
+#include <string.h>
+
+using namespace std;
 
 class game{
+  private:
+    int number;
+
   public:
-    int selectDifficulty;
-    char* hint;
-    char* live;
+    string hint;
+    int live;
 
-    setDifficulty();
+    void setDifficulty(int stage);
 
-    generateNumber();
+    void generateNumber();
 
-    numberInput();
+    bool guessCorrect(int guess);
 
-    guessCorrect();
+    game();
+
+};
+
+class ui{
+
+  public:
+
+    int selectDifficulty();
+
+    int numberInput(const char* msg, int min = 1, int max = 100);
+
 };
