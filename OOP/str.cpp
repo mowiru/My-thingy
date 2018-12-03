@@ -4,20 +4,29 @@
 
 using namespace std;
 
+void str::ChangeValue() {
+  *(this->value+2) = '?';
+}
+
 str::str() {
   this->value = (char*) calloc(1,sizeof(char));
   this->_length = 0;
 }
 
 str::str(char* val){
-  this->value = val;
   this->_length = strlen(val);
+  this->value = (char*) calloc(this->_length,sizeof(char));
+  strcpy(this->value, val);
 }
 
 str::str(const char* val){
   this->_length = strlen(val);
   this->value = (char*) calloc(this->_length,sizeof(char));
   strcpy(this->value, val);
+}
+
+str::~str(){
+  free(this->value);
 }
 
 const char* str::c() {
@@ -86,6 +95,21 @@ str* str::center(int number, char space, char end){
   return this->padLeft(t1 + this->_length, space)->padRight(number, end);
 }
 
+void str::operator =(str& newValue){
+  this->_length = newValue.length();
+  this->value = (char*) calloc(this->_length,sizeof(char));
+  strcpy(this->value, newValue.c());
+}
+
+void str::operator =(const char* newValue) {
+  this->_length = strlen(newValue);
+  this->value = (char*) calloc(this->_length,sizeof(char));
+  strcpy(this->value, newValue);
+}
+
+str& str::operator +(str& value){
+  return *(this->add(value));
+}
 
 
 
@@ -95,8 +119,10 @@ str* str::center(int number, char space, char end){
 
 
 
-
-
+ostream& operator<<(ostream& s, str& v) {
+  s << v.c();
+  return s;
+}
 
 
 

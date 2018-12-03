@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string.h>
-#include <fstream>
+#include <iomanip>
 #include "log.hpp"
+
 
 #define APP "singleton_test"
 
@@ -14,25 +15,22 @@ using namespace std;
  */
 int main(int argc, char* argv[]) {
 
-  /*ifstream inputFileBla("./MeineDatenDatei.json");
+  /*
+  ifstream inputFileBla("./MeineDatenDatei.json");
   string ErsteZeile;
   inputFileBla >> ErsteZeile;*/
 
-  ofstream fs;
-
-  fs.open("./data.log", ofstream::out | ofstream::app);
-
-  fs << "Hallo Welt" << endl;
-
-  fs.close();
-
   FileLog Log;
 
-  Log.i("Neues Project: ", APP);
-  Log.i("Hallo");
-  Log.a("ich");
-  Log.w("bin ein");
-  Log.e("Test!");
+  //Log.START(" ");
+  Log.i("New Projekt: ", APP);
+  Log.i("I'm a test.");
+  Log.a("Potato.");
+  Log.w("This is a Test.");
+  Log.e("Test has no error!");
+  //Log.END(" ");
+
+  //cout << setw(40) << setfill('_') << endl;
 
   return 0;
 }

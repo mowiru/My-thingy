@@ -1,6 +1,7 @@
 #include <iostream>
 #include "objects.hpp"
 #include <vector>
+#include <string.h>
 #include "str.hpp"
 
 using namespace std;
@@ -8,8 +9,50 @@ using namespace std;
 void Example1();
 
 int main () {
+  /*
+    ->: pointer member;
+    .: objekt member;
+    :: : static member operator;
+    &: referenzierungs(ref);
+    *: Dereferenzierungs operator(pointer);
+    ----------------------------------
+    +: addition;
+    -: substraction;
+    *: multi;
+    /: divi,
+    %: modulo;
+    =: zuweisung;
+    ^: XOR;
+    ==: gleich;
+    &: binäres und;
+    |: binäre oder;
+    ||: oder;
+    &&: und;
+    !: not;
+    !=: not equals;
+    <: kleiner;
+    >: grösser:
+    <=: kleiner gleich;
+    >=: grösser gleich;
+    <<: shift operator (cout);
+    >>: shift operator (cin);
+    []: indizierungs operator;
 
-  str s1("Linksbuendig"),
+   */
+
+  str s1 = "Peter";
+  str s2 = "Otto";
+  str s3 = s1 + s2;
+  //str s4 = 15;
+
+  s1.padLeft(4);
+  s1.add(s2);
+
+  cout << s3 << endl;
+
+  //s1 = "Otto";
+
+  /*str s1("Linksbuendig"),
       s2("Rechtsbuendig"),
       s3("Mittig"),
       s4("Umfasst"),
@@ -21,7 +64,7 @@ int main () {
   cout << "|" << s3.padRight(13)->padLeft(20)->c() << "|" << endl;
   cout << "|" << s4.padLeft(14,'>')->padRight(20,'<')->c() << "|" << endl;
   cout << "|" << s5.center(20)->c() << "|" << endl;
-  cout << "|" << s6.padLeft(3,'#')->c() << "|" << endl;
+  cout << "|" << s6.padLeft(3,'#')->c() << "|" << endl;*/
 
   return 0;
 }

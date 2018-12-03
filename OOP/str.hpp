@@ -1,12 +1,20 @@
+#include <iostream>
+
+using namespace std;
+
 class str {
 private:
   char* value;
   int _length;
 
 public:
+  void ChangeValue();
+
   str();
   str(const char* val);
   str(char* val);
+
+  ~str();
 
   const char* c();
 
@@ -35,4 +43,13 @@ public:
   bool equals(const char* given);
 
   str* substr(int a, int b);
+
+  void operator =(str& newValue);
+  //void operator =(char* newValue);
+  void operator =(const char* newValue);
+
+  str& operator +(str& Value);
+  //str& operator +(str* newValue);
 };
+
+ostream& operator<<(ostream&s, str& v);
